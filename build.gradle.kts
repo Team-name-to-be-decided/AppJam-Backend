@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.0"
+    id("org.springframework.boot") version "2.7.4"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.21"
     kotlin("plugin.spring") version "1.7.21"
@@ -29,7 +29,11 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-security")
 
-    runtimeOnly("com.mysql:mysql-connector-j")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+    implementation("mysql", "mysql-connector-java", "8.0.12")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     kapt(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
@@ -40,6 +44,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+    runtimeOnly("org.springdoc:springdoc-openapi-kotlin:1.6.14")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
 }
 
 allOpen {
